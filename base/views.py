@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.db.models  import Q
 from rest_framework.views import  APIView
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from .models import Advocate, Company
 from .serializers import AdvocatesListSerializer, AdvocatesDetailSerializer , CompanyListSerializer
@@ -23,7 +23,7 @@ def endpoints(request):
 
 
 class AdvocatesList(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get (self,request):
         advocates = Advocate.objects.all()
         serializer = AdvocatesListSerializer(advocates,many=True)
@@ -37,7 +37,7 @@ class AdvocatesList(APIView):
 
 
 class AdvocateDetail(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get_object(self,id):
         try:
             return Advocate.objects.get(id=id)
@@ -64,7 +64,7 @@ class AdvocateDetail(APIView):
 
 
 class CompanyList(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self,request,format=None):
         companies = Company.objects.all()
         serializer = CompanyListSerializer(companies,many=True)

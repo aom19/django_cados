@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView,TokenVerifyView
-
+from .yasg import urlpatterns as doc_urls
 
 
 urlpatterns = [
@@ -13,3 +13,4 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('base/', include('base.urls')),
 ]
+urlpatterns += doc_urls
