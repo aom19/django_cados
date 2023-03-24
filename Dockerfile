@@ -2,11 +2,11 @@ FROM python:3.10
 
 RUN pip install --upgrade pip
 
-COPY ./requirements.txt .
+COPY ./req.txt .
 
-RUN pip install -r requirements.txt
+RUN pip install -r req.txt
 
-COPY ./django_project  /app
+COPY .    /app
 
 WORKDIR /app
 
